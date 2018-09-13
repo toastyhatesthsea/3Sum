@@ -31,7 +31,11 @@ public class Sum
                 aList.add(nums[0]);
                 aList.add(nums[i]);
                 aList.add(theSum);
-                answer.add(aList);
+
+                if (!hasDuplicates(answer, aList))
+                {
+                    answer.add(aList);
+                }
             }
 
         }
@@ -50,14 +54,23 @@ public class Sum
     }
 
     /**
-     *
+     * Checks to see if the answer list has any duplicates
      * @param masterList
      * @param aList
      * @return
      */
     public boolean hasDuplicates(List<List<Integer>> masterList, List<Integer> aList)
     {
-
+        boolean answer = false;
+        for (List lister : masterList)
+        {
+            answer = aList.containsAll(aList);
+            if (answer)
+            {
+                break;
+            }
+        }
+        return answer;
     }
 }
 
