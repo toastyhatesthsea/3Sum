@@ -10,13 +10,13 @@ public class Sum
 
     public List<List<Integer>> threeSum(int[] nums)
     {
+        List<List<Integer>> answer = new ArrayList<>();
         if (nums.length < 3)
         {
-            return null;
+            return answer;
         }
 
         HashMap<Integer, Integer> aMap = convertToHashMap(nums);
-        List<List<Integer>> answer = new ArrayList<>();
 
         for (int i = 1; i < nums.length; i++)
         {
@@ -26,15 +26,24 @@ public class Sum
 
             if (hasValue != null)
             {
-                ArrayList<Integer> aList = new ArrayList<>();
-
-                aList.add(nums[0]);
-                aList.add(nums[i]);
-                aList.add(theSum);
-
-                if (!hasDuplicates(answer, aList))
+                boolean canAdd = true;
+                if((theSum == nums[0] && hasValue < 2)||(theSum == nums[i] && hasValue < 2))
                 {
-                    answer.add(aList);
+                    canAdd = false;
+                }
+
+                if (canAdd)
+                {
+                    ArrayList<Integer> aList = new ArrayList<>();
+
+                    aList.add(nums[0]);
+                    aList.add(nums[i]);
+                    aList.add(theSum);
+
+                    if (!hasDuplicates(answer, aList))
+                    {
+                        answer.add(aList);
+                    }
                 }
             }
 
@@ -64,7 +73,7 @@ public class Sum
         boolean answer = false;
         for (List lister : masterList)
         {
-            answer = aList.containsAll(aList);
+            answer = lister.containsAll(aList);
             if (answer)
             {
                 break;
@@ -83,7 +92,9 @@ class SumTest
         Sum rawr = new Sum();
 
         int[] meow = {-1, 0, 1, 2, -1, -4};
+        int[] testCase1 = {1, 2, -2, -1};
 
-        List<List<Integer>> rawrs =  rawr.threeSum(meow);
+
+        List<List<Integer>> rawrs =  rawr.threeSum(testCase1);
     }
 }
