@@ -75,7 +75,7 @@ public class Sum
         boolean answer = false;
         for (List lister : masterList)
         {
-            answer = lister.containsAll(aList);
+            answer = aList.containsAll(lister);
             if (answer)
             {
                 break;
@@ -98,6 +98,23 @@ class SumTest
         int[] testCase2 = {3, 0, -2, -1, 1, 2};
 
         int[] zeroTest = {-4, -2, 1, -5, -4, -4, 4, -2, 0, 4, 0, -2, 3, 1, -5, 0};
+
+        List<List<Integer>> masterList = new ArrayList<>();
+
+        List<Integer> oneList = new ArrayList<>();
+        List<Integer> allZeroes = new ArrayList<>();
+
+        allZeroes.add(0);
+        allZeroes.add(0);
+        allZeroes.add(0);
+
+        oneList.add(0);
+        oneList.add(1);
+        oneList.add(4);
+
+        masterList.add(oneList);
+
+        boolean hasDuplicates = rawr.hasDuplicates(masterList, allZeroes);
 
 
         rawr.convertToHashMap(zeroTest);
