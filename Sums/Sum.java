@@ -58,16 +58,8 @@ public class Sum
         HashMap<Integer, Integer> answer = new HashMap<>();
         for (Integer aNum : nums)
         {
-
-            if (aNum == 0)
-            {
-                int total = answer.getOrDefault(aNum, 0);
-                answer.put(aNum, total + 1);
-            }
-            else
-            {
-                answer.put(aNum, 1);
-            }
+            int total = answer.getOrDefault(aNum, 0);
+            answer.put(aNum, total + 1);
         }
         return answer;
     }
@@ -108,6 +100,7 @@ class SumTest
         int[] zeroTest = {-4, -2, 1, -5, -4, -4, 4, -2, 0, 4, 0, -2, 3, 1, -5, 0};
 
 
+        rawr.convertToHashMap(zeroTest);
 
         List<List<Integer>> rawrs =  rawr.threeSum(zeroTest);
     }
