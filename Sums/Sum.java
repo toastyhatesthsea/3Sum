@@ -78,6 +78,16 @@ public class Sum
         boolean answer = false;
         for (List lister : masterList)
         {
+            for (int i = 0; i < lister.size(); i++)
+            {
+                for (int j = 0; j < aList.size(); j++)
+                {
+                    if (lister.get(i).equals(aList.get(j)))
+                    {
+                        //properly check for duplicates
+                    }
+                }
+            }
             answer = aList.containsAll(lister);
             if (answer)
             {
@@ -99,6 +109,7 @@ class SumTest
         int[] meow = {-1, 0, 1, 2, -1, -4};
         int[] testCase1 = {1, 2, -2, -1};
         int[] testCase2 = {3, 0, -2, -1, 1, 2};
+        int[] testCase3 = {0, 3, 0, 1, 1, -1, -5, -5, 3, -3, -3, 0};
 
         int[] zeroTest = {-4, -2, 1, -5, -4, -4, 4, -2, 0, 4, 0, -2, 3, 1, -5, 0};
         int[] fourZeroes = {0, 0, 0, 0};
@@ -123,6 +134,6 @@ class SumTest
 
         rawr.convertToHashMap(zeroTest);
 
-        List<List<Integer>> rawrs =  rawr.threeSum(fourZeroes);
+        List<List<Integer>> rawrs =  rawr.threeSum(testCase3);
     }
 }
