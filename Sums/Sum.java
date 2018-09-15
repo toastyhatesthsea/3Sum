@@ -18,35 +18,37 @@ public class Sum
 
         HashMap<Integer, Integer> aMap = convertToHashMap(nums);
 
-        for (int i = 1; i < nums.length; i++)
+        for (int i = 0; i < nums.length - 1; i++)
         {
-            int theSum = (nums[0] + nums[i]) * -1; //Gets the number you need to make zero
-
-            Integer hasValue = aMap.get(theSum);
-
-            if (hasValue != null)
+            for (int j = i + 1; j < nums.length; j++)
             {
-                boolean canAdd = true;
-                if((theSum == nums[0] && hasValue < 2)||(theSum == nums[i] && hasValue < 2))
+                int theSum = (nums[i] + nums[j]) * -1; //Gets the number you need to make zero
+
+                Integer hasValue = aMap.get(theSum);
+
+                if (hasValue != null)
                 {
-                    canAdd = false;
-                }
-
-                if (canAdd)
-                {
-                    ArrayList<Integer> aList = new ArrayList<>();
-
-                    aList.add(nums[0]);
-                    aList.add(nums[i]);
-                    aList.add(theSum);
-
-                    if (!hasDuplicates(answer, aList))
+                    boolean canAdd = true;
+                    if ((theSum == nums[i] && hasValue < 2) || (theSum == nums[j] && hasValue < 2))
                     {
-                        answer.add(aList);
+                        canAdd = false;
+                    }
+
+                    if (canAdd)
+                    {
+                        ArrayList<Integer> aList = new ArrayList<>();
+
+                        aList.add(nums[i]);
+                        aList.add(nums[j]);
+                        aList.add(theSum);
+
+                        if (!hasDuplicates(answer, aList))
+                        {
+                            answer.add(aList);
+                        }
                     }
                 }
             }
-
         }
         return answer;
     }
@@ -56,8 +58,16 @@ public class Sum
         HashMap<Integer, Integer> answer = new HashMap<>();
         for (Integer aNum : nums)
         {
-            int total = answer.getOrDefault(aNum, 0);
-            answer.put(aNum, total + 1);
+
+            if (aNum == 0)
+            {
+                int total = answer.getOrDefault(aNum, 0);
+                answer.put(aNum, total + 1);
+            }
+            else
+            {
+                answer.put(aNum, 1);
+            }
         }
         return answer;
     }
@@ -93,8 +103,12 @@ class SumTest
 
         int[] meow = {-1, 0, 1, 2, -1, -4};
         int[] testCase1 = {1, 2, -2, -1};
+        int[] testCase2 = {3, 0, -2, -1, 1, 2};
+
+        int[] zeroTest = {-4, -2, 1, -5, -4, -4, 4, -2, 0, 4, 0, -2, 3, 1, -5, 0};
 
 
-        List<List<Integer>> rawrs =  rawr.threeSum(testCase1);
+
+        List<List<Integer>> rawrs =  rawr.threeSum(zeroTest);
     }
 }
