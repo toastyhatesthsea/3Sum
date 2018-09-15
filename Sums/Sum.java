@@ -32,6 +32,9 @@ public class Sum
                     if ((theSum == nums[i] && hasValue < 2) || (theSum == nums[j] && hasValue < 2))
                     {
                         canAdd = false;
+                    } else if ((theSum == 0 && hasValue > 1) && hasValue < 3)
+                    {
+                        canAdd = false;
                     }
 
                     if (canAdd)
@@ -98,6 +101,7 @@ class SumTest
         int[] testCase2 = {3, 0, -2, -1, 1, 2};
 
         int[] zeroTest = {-4, -2, 1, -5, -4, -4, 4, -2, 0, 4, 0, -2, 3, 1, -5, 0};
+        int[] fourZeroes = {0, 0, 0, 0};
 
         List<List<Integer>> masterList = new ArrayList<>();
 
@@ -119,6 +123,6 @@ class SumTest
 
         rawr.convertToHashMap(zeroTest);
 
-        List<List<Integer>> rawrs =  rawr.threeSum(zeroTest);
+        List<List<Integer>> rawrs =  rawr.threeSum(fourZeroes);
     }
 }
