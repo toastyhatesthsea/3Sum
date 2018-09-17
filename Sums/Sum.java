@@ -75,23 +75,18 @@ public class Sum
      */
     public boolean hasDuplicates(List<List<Integer>> masterList, List<Integer> aList)
     {
-        boolean answer = false;
+        boolean answer = true;
         for (List lister : masterList)
         {
-            for (int i = 0; i < lister.size(); i++)
+            for (int i = 0; i < lister.size() && answer; i++)
             {
-                for (int j = 0; j < aList.size(); j++)
+                for (int j = 0; j < aList.size() && answer; j++)
                 {
-                    if (lister.get(i).equals(aList.get(j)))
+                    if (!lister.get(i).equals(aList.get(j)))
                     {
-                        //properly check for duplicates
+                        answer = false;//properly check for duplicates
                     }
                 }
-            }
-            answer = aList.containsAll(lister);
-            if (answer)
-            {
-                break;
             }
         }
         return answer;
