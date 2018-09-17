@@ -1,12 +1,84 @@
 package Sums;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 public class Sum
 {
 
+
+    public List<List<Integer>> anotherThreeSum(int[] num)
+    {
+        Arrays.parallelSort(num);
+
+        int aThird = num.length / 3;
+
+        int greatestValue = num[num.length - 1];
+        int lowestValue = num[0];
+
+        int firstThirdLowest = 0;
+        int firstThirdHighest = aThird - 1;
+
+        int secondThirdLowest = aThird;
+        int secondThirdHighest = aThird + aThird - 1;
+
+        int thirdLowest = aThird + aThird;
+        int thirdHighest;
+
+        if (num.length % 3 == 0) // even
+        {
+            thirdHighest = aThird + aThird + aThird - 1;
+        }
+        else //not even
+        {
+            thirdHighest = aThird + aThird + aThird;
+        }
+
+        //Compute first third with the last third of the Array
+        for (int i = 0; i <= firstThirdHighest; i++)
+        {
+            for (int j = thirdLowest; j <= thirdHighest; j++)
+            {
+                int sumValue = (num[i] + num[j]) * -1;
+
+                if()
+
+
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Returns which third in the array the number is located in the sorted array
+     * @param num Sorted Array
+     * @param number int Number to find
+     * @return int
+     */
+    public int whichThird(int[] num, int number)
+    {
+        int aThird = num.length / 3;
+
+        int greatestValue = num[num.length - 1];
+        int lowestValue = num[0];
+
+        int firstThirdLowest = 0;
+        int firstThirdHighest = aThird - 1;
+
+        int secondThirdLowest = aThird;
+        int secondThirdHighest = aThird + aThird - 1;
+
+        int thirdLowest = aThird + aThird;
+        int thirdHighest;
+
+        if (number >= num[firstThirdLowest] && number <= num[firstThirdHighest])
+        {
+            return 1;
+        }
+    }
 
     public List<List<Integer>> threeSum(int[] nums)
     {
@@ -75,18 +147,26 @@ public class Sum
      */
     public boolean hasDuplicates(List<List<Integer>> masterList, List<Integer> aList)
     {
-        boolean answer = true;
+        boolean answer = false;
         for (List lister : masterList)
         {
-            for (int i = 0; i < lister.size() && answer; i++)
+            int totalEqualedValues = 0;
+            ArrayList<Integer> valuesRemoved = new ArrayList<>();
+            for (int i = 0; i < aList.size() && totalEqualedValues < 3; i++)
             {
-                for (int j = 0; j < aList.size() && answer; j++)
+                boolean hasValue = lister.contains(aList.get(i));
+                if (hasValue)
                 {
-                    if (!lister.get(i).equals(aList.get(j)))
-                    {
-                        answer = false;//properly check for duplicates
-                    }
+                    totalEqualedValues++;
+                    lister.remove(aList.get(i));
+                    valuesRemoved.add(aList.get(i));
                 }
+            }
+            lister.addAll(valuesRemoved);
+            if (totalEqualedValues == 3)
+            {
+                answer = true;
+                break;
             }
         }
         return answer;
@@ -105,6 +185,7 @@ class SumTest
         int[] testCase1 = {1, 2, -2, -1};
         int[] testCase2 = {3, 0, -2, -1, 1, 2};
         int[] testCase3 = {0, 3, 0, 1, 1, -1, -5, -5, 3, -3, -3, 0};
+        int[] largeCase = {10, -2, -12, 3, -15, -12, 2, -11, 3, -12, 9, 12, 0, -5, -4, -2, -7, -15, 7, 4, -5, -14, -15, -15, -4, 10, 9, -6, 7, 1, 12, -6, 14, -15, 12, 14, 10, 0, 10, -10, 3, 4, -12, 10, 7, -9, -7, -15, -8, -15, -4, 2, 9, -4, 3, -10, 13, -3, -1, 5, 5, -4, -15, 4, -11, 4, -4, 6, -11, -9, 12, 7, 11, 7, 2, -5, 13, 10, -5, -10, 3, 7, 0, -3, 10, -12, 2, 9, -8, 8, -9, 13, 12, 13, -6, 8, 3, 5, -9, 7, 12, 10, -8, 0, 2, 1, 10, -7, -3, -10, -10, 7, 4, 5, -11, -8, 0, -2, -14, 8, 13, -8, -2, 10, 13};
 
         int[] zeroTest = {-4, -2, 1, -5, -4, -4, 4, -2, 0, 4, 0, -2, 3, 1, -5, 0};
         int[] fourZeroes = {0, 0, 0, 0};
@@ -112,23 +193,40 @@ class SumTest
         List<List<Integer>> masterList = new ArrayList<>();
 
         List<Integer> oneList = new ArrayList<>();
+        List<Integer> testerList = new ArrayList<>();
+        List<Integer> secondList = new ArrayList<>();
         List<Integer> allZeroes = new ArrayList<>();
 
         allZeroes.add(0);
         allZeroes.add(0);
         allZeroes.add(0);
 
+        testerList.add(-1);
+        testerList.add(0);
+        testerList.add(1);
+
         oneList.add(0);
         oneList.add(1);
         oneList.add(4);
 
-        masterList.add(oneList);
+        secondList.add(0);
+        secondList.add(3);
+        secondList.add(-3);
 
-        boolean hasDuplicates = rawr.hasDuplicates(masterList, allZeroes);
+
+
+        masterList.add(oneList);
+        masterList.add(secondList);
+
+        boolean answer = testerList.contains(0);
+
+        boolean hasDuplicates = rawr.hasDuplicates(masterList, testerList);
 
 
         rawr.convertToHashMap(zeroTest);
 
-        List<List<Integer>> rawrs =  rawr.threeSum(testCase3);
+        List<List<Integer>> rawrs =  rawr.threeSum(zeroTest);
+
+        //rawr.anotherThreeSum(zeroTest);
     }
 }
