@@ -13,6 +13,8 @@ public class Sum
     {
         Arrays.parallelSort(num);
 
+        List<List<Integer>> answer = new ArrayList<>();
+
         int aThird = num.length / 3;
 
         int greatestValue = num[num.length - 1];
@@ -37,19 +39,63 @@ public class Sum
         }
 
         //Compute first third with the last third of the Array
+        List<List<Integer>> firstPart = new ArrayList<>();
+        int secondThirdIndexMark = 0;
         for (int i = 0; i <= firstThirdHighest; i++)
         {
             for (int j = thirdLowest; j <= thirdHighest; j++)
             {
                 int sumValue = (num[i] + num[j]) * -1;
+                int index;
+                ArrayList<Integer> aList = new ArrayList<>();
 
-                if()
+                int findLocation = whichThird(num, sumValue);
 
+                if (findLocation == 1)
+                {
+                    index = Arrays.binarySearch(num, firstThirdLowest, firstThirdHighest + 1, sumValue);
 
+                    if (index > i)
+                    {
+                        aList.add(num[i]);
+                        aList.add(num[j]);
+                        aList.add(num[index]);
+                    }
+
+                } else if (findLocation == 2)
+                {
+                    index = Arrays.binarySearch(num, secondThirdLowest, secondThirdHighest + 1, sumValue);
+
+                    if (index >= 0 && index > secondThirdIndexMark)
+                    {
+                        secondThirdIndexMark = index;
+                        aList.add(num[i]);
+                        aList.add(num[j]);
+                        aList.add(num[index]);
+                    }
+
+                } else if (findLocation == 3)
+                {
+                    index = Arrays.binarySearch(num, thirdLowest, thirdHighest + 1, sumValue);
+
+                    if (index >= 0 && index > j)
+                    {
+                        aList.add(num[i]);
+                        aList.add(num[j]);
+                        aList.add(num[index]);
+                    }
+                }
+                if (aList.size() == 3)
+                {
+                    firstPart.add(aList);
+                }
             }
         }
 
-        return null;
+        answer.addAll(firstPart);
+
+
+        return answer;
     }
 
     /**
@@ -74,9 +120,28 @@ public class Sum
         int thirdLowest = aThird + aThird;
         int thirdHighest;
 
+        if (num.length % 3 == 0) // even
+        {
+            thirdHighest = aThird + aThird + aThird - 1;
+        }
+        else //not even
+        {
+            thirdHighest = aThird + aThird + aThird;
+        }
+
         if (number >= num[firstThirdLowest] && number <= num[firstThirdHighest])
         {
             return 1;
+        } else if (number >= num[secondThirdLowest] && number <= num[secondThirdHighest])
+        {
+            return 2;
+        } else if (number >= num[thirdLowest] && number <= num[thirdHighest])
+        {
+            return 3;
+        }
+        else
+        {
+            return 0;
         }
     }
 
@@ -225,8 +290,12 @@ class SumTest
 
         rawr.convertToHashMap(zeroTest);
 
-        List<List<Integer>> rawrs =  rawr.threeSum(zeroTest);
+        //List<List<Integer>> rawrs =  rawr.threeSum(zeroTest);
 
-        //rawr.anotherThreeSum(zeroTest);
+        Arrays.parallelSort(zeroTest);
+
+        int index = Arrays.binarySearch(zeroTest, 0, zeroTest.length, 2);
+
+        rawr.anotherThreeSum(zeroTest);
     }
 }
