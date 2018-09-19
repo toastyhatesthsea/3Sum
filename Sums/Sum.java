@@ -84,6 +84,19 @@ public class Sum
                         aList.add(num[j]);
                         aList.add(num[index]);
                     }
+
+                    int k = j;
+                    //updates
+                    while (k < num.length && num[j] == num[k])
+                    {
+                        k++;
+                    }
+                    j = k;
+
+                    if (j + 1 < num.length && (num[j] == num[j++]))
+                    {
+                        j++;
+                    }
                 }
                 if (aList.size() == 3)
                 {
