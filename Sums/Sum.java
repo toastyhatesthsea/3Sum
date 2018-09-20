@@ -14,10 +14,6 @@ public class Sum
 
         Arrays.parallelSort(num);
 
-        //HashMap<Integer, Integer> aMap = convertToHashMap(num);
-
-
-
         for (int i = 0; i + 1 < num.length; i++)
         {
             for (int j = num.length - 1; j > i; j--)
@@ -35,9 +31,6 @@ public class Sum
                     break;
                 }
                 else if (theSum >= 1 && theSum > num[j])
-                {
-                    break;
-                } else if (theSum < 1 && theSum < num[i])
                 {
                     break;
                 }
@@ -76,11 +69,6 @@ public class Sum
                 if (aList.size() == 3)
                 {
                     answer.add(aList);
-                }
-
-                if (theSum > num[j] || theSum < num[i])
-                {
-                    break;
                 }
             }
 
@@ -412,6 +400,6 @@ class SumTest
 
         int index = Arrays.binarySearch(zeroTest, 0, zeroTest.length, 2);
 
-        rawr.oneMoreThreeSum(zeroTest);
+        rawr.oneMoreThreeSum(testCase2);
     }
 }
