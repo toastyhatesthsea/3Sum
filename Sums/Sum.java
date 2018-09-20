@@ -20,7 +20,7 @@ public class Sum
 
         for (int i = 0; i + 1 < num.length; i++)
         {
-            for (int j = num.length - 1; j > i; i--)
+            for (int j = num.length - 1; j > i; j--)
             {
                 int theSum = (num[i] + num[j]) * -1;
                 ArrayList<Integer> aList = new ArrayList<>();
@@ -58,13 +58,28 @@ public class Sum
 
                 j = k;
 
-
-
                 if (aList.size() == 3)
                 {
                     answer.add(aList);
                 }
+
+                if (theSum > num[j] || theSum < num[i])
+                {
+                    break;
+                }
             }
+
+            int h = i;
+            //Skip duplicates
+            while (h + 1 < num.length && num[i] == num[h + 1])
+            {
+                if (num[i] == num[h])
+                {
+                    h++;
+                }
+            }
+
+            i = h;
 
         }
 
