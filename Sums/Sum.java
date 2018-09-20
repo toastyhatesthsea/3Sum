@@ -14,7 +14,7 @@ public class Sum
 
         Arrays.parallelSort(num);
 
-        HashMap<Integer, Integer> aMap = convertToHashMap(num);
+        //HashMap<Integer, Integer> aMap = convertToHashMap(num);
 
 
 
@@ -23,13 +23,38 @@ public class Sum
             for (int j = num.length - 1; j > i; i--)
             {
                 int theSum = (num[i] + num[j]) * -1;
+                ArrayList<Integer> aList = new ArrayList<>();
 
+                if (theSum > 1 && theSum <= num[j - 1])
+                {
+                    int index = Arrays.binarySearch(num, i + 1, j - 1, theSum);
 
+                    if (index > 0 && index > i)
+                    {
+                        aList.add(num[i]);
+                        aList.add(num[j]);
+                        aList.add(num[index]);
+                    }
+                } else if (theSum < 1 && theSum >= num[i + 1])
+                {
+                    int index = Arrays.binarySearch(num, i + 1, j - 1, theSum);
+
+                    if (index > 0 && index > i)
+                    {
+                        aList.add(i);
+                        aList.add(j);
+                        aList.add(num[index]);
+                    }
+                }
+                if (aList.size() == 3)
+                {
+                    answer.add(aList);
+                }
             }
 
         }
 
-        return null;
+        return answer;
     }
 
 
