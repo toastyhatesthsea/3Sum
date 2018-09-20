@@ -8,6 +8,30 @@ import java.util.List;
 public class Sum
 {
 
+    public List<List<Integer>> oneMoreThreeSum(int[] num)
+    {
+        List<List<Integer>> answer = new ArrayList<>();
+
+        Arrays.parallelSort(num);
+
+        HashMap<Integer, Integer> aMap = convertToHashMap(num);
+
+
+
+        for (int i = 0; i + 1 < num.length; i++)
+        {
+            for (int j = num.length - 1; j > i; i--)
+            {
+                int theSum = (num[i] + num[j]) * -1;
+
+
+            }
+
+        }
+
+        return null;
+    }
+
 
     public List<List<Integer>> anotherThreeSum(int[] num)
     {
@@ -87,22 +111,33 @@ public class Sum
 
                     int k = j;
                     //updates
-                    while (k < num.length && num[j] == num[k])
+                    while (k + 1 < num.length && num[j] == num[k + 1])
                     {
-                        k++;
+                        if (num[j] == num[k])
+                        {
+                            k++;
+                        }
                     }
+
                     j = k;
 
-                    if (j + 1 < num.length && (num[j] == num[j++]))
-                    {
-                        j++;
-                    }
                 }
                 if (aList.size() == 3)
                 {
                     firstPart.add(aList);
                 }
             }
+
+            int k = i;
+
+            while (k + 1 < num.length && num[i] == num[k + 1])
+            {
+                if (num[i] == num[k])
+                {
+                    k++;
+                }
+            }
+            i = k;
         }
 
         answer.addAll(firstPart);
@@ -309,6 +344,6 @@ class SumTest
 
         int index = Arrays.binarySearch(zeroTest, 0, zeroTest.length, 2);
 
-        rawr.anotherThreeSum(zeroTest);
+        rawr.oneMoreThreeSum(zeroTest);
     }
 }
