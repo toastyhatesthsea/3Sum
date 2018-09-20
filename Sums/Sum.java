@@ -25,9 +25,26 @@ public class Sum
                 int theSum = (num[i] + num[j]) * -1;
                 ArrayList<Integer> aList = new ArrayList<>();
 
+                if (num[i] == 0 && i + 2 < num.length && num[i + 1] == 0 && num[i+2] == 0)
+                {
+
+                    aList.add(0);
+                    aList.add(0);
+                    aList.add(0);
+                    answer.add(aList);
+                    break;
+                }
+                else if (theSum >= 1 && theSum > num[j])
+                {
+                    break;
+                } else if (theSum < 1 && theSum < num[i])
+                {
+                    break;
+                }
+
                 if (theSum >= 1 && theSum <= num[j - 1])
                 {
-                    int index = Arrays.binarySearch(num, i + 1, j - 1, theSum);
+                    int index = Arrays.binarySearch(num, i + 1, j, theSum);
 
                     if (index > 0 && index > i)
                     {
@@ -37,12 +54,12 @@ public class Sum
                     }
                 } else if (theSum < 1 && theSum >= num[i + 1])
                 {
-                    int index = Arrays.binarySearch(num, i + 1, j - 1, theSum);
+                    int index = Arrays.binarySearch(num, i + 1, j, theSum);
 
                     if (index > 0 && index > i)
                     {
-                        aList.add(i);
-                        aList.add(j);
+                        aList.add(num[i]);
+                        aList.add(num[j]);
                         aList.add(num[index]);
                     }
                 }
@@ -55,9 +72,7 @@ public class Sum
                         k--;
                     }
                 }
-
                 j = k;
-
                 if (aList.size() == 3)
                 {
                     answer.add(aList);
@@ -80,7 +95,6 @@ public class Sum
             }
 
             i = h;
-
         }
 
         return answer;
