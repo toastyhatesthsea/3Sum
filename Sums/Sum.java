@@ -8,7 +8,19 @@ import java.util.List;
 public class Sum
 {
 
-    public List<List<Integer>> oneMoreThreeSum(int[] num)
+    /** Given an array nums of n integers, are there elements a, b, c in nums such that a + b + c = 0? Find all unique triplets in the array which gives the sum of zero.
+     * The solution set must not contain duplicate triplets.
+     * Given array nums = [-1, 0, 1, 2, -1, -4],
+     *
+     * A solution set is:
+     * [
+     *   [-1, 0, 1],
+     *   [-1, -1, 2]
+     * ]
+     * @param num int[]
+     * @return List
+     */
+    public List<List<Integer>> threeSum(int[] num)
     {
         List<List<Integer>> answer = new ArrayList<>();
 
@@ -84,7 +96,6 @@ public class Sum
 
             i = h;
         }
-
         return answer;
     }
 
@@ -247,54 +258,6 @@ public class Sum
         {
             return 0;
         }
-    }
-
-    public List<List<Integer>> threeSum(int[] nums)
-    {
-        List<List<Integer>> answer = new ArrayList<>();
-        if (nums.length < 3)
-        {
-            return answer;
-        }
-
-        HashMap<Integer, Integer> aMap = convertToHashMap(nums);
-
-        for (int i = 0; i < nums.length - 1; i++)
-        {
-            for (int j = i + 1; j < nums.length; j++)
-            {
-                int theSum = (nums[i] + nums[j]) * -1; //Gets the number you need to make zero
-
-                Integer hasValue = aMap.get(theSum);
-
-                if (hasValue != null)
-                {
-                    boolean canAdd = true;
-                    if ((theSum == nums[i] && hasValue < 2) || (theSum == nums[j] && hasValue < 2))
-                    {
-                        canAdd = false;
-                    } else if ((theSum == 0 && hasValue > 1) && hasValue < 3)
-                    {
-                        canAdd = false;
-                    }
-
-                    if (canAdd)
-                    {
-                        ArrayList<Integer> aList = new ArrayList<>();
-
-                        aList.add(nums[i]);
-                        aList.add(nums[j]);
-                        aList.add(theSum);
-
-                        if (!hasDuplicates(answer, aList))
-                        {
-                            answer.add(aList);
-                        }
-                    }
-                }
-            }
-        }
-        return answer;
     }
 
     public HashMap<Integer, Integer> convertToHashMap(int[] nums)
