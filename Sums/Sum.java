@@ -99,120 +99,6 @@ public class Sum
         return answer;
     }
 
-
-    public List<List<Integer>> anotherThreeSum(int[] num)
-    {
-        Arrays.parallelSort(num);
-
-        List<List<Integer>> answer = new ArrayList<>();
-
-        int aThird = num.length / 3;
-
-        int greatestValue = num[num.length - 1];
-        int lowestValue = num[0];
-
-        int firstThirdLowest = 0;
-        int firstThirdHighest = aThird - 1;
-
-        int secondThirdLowest = aThird;
-        int secondThirdHighest = aThird + aThird - 1;
-
-        int thirdLowest = aThird + aThird;
-        int thirdHighest;
-
-        if (num.length % 3 == 0) // even
-        {
-            thirdHighest = aThird + aThird + aThird - 1;
-        }
-        else //not even
-        {
-            thirdHighest = aThird + aThird + aThird;
-        }
-
-        //Compute first third with the last third of the Array
-        List<List<Integer>> firstPart = new ArrayList<>();
-        int secondThirdIndexMark = 0;
-        for (int i = 0; i <= firstThirdHighest; i++)
-        {
-            for (int j = thirdLowest; j <= thirdHighest; j++)
-            {
-                int sumValue = (num[i] + num[j]) * -1;
-                int index;
-                ArrayList<Integer> aList = new ArrayList<>();
-
-                int findLocation = whichThird(num, sumValue);
-
-                if (findLocation == 1)
-                {
-                    index = Arrays.binarySearch(num, firstThirdLowest, firstThirdHighest + 1, sumValue);
-
-                    if (index > i)
-                    {
-                        aList.add(num[i]);
-                        aList.add(num[j]);
-                        aList.add(num[index]);
-                    }
-
-                } else if (findLocation == 2)
-                {
-                    index = Arrays.binarySearch(num, secondThirdLowest, secondThirdHighest + 1, sumValue);
-
-                    if (index >= 0 && index > secondThirdIndexMark)
-                    {
-                        secondThirdIndexMark = index;
-                        aList.add(num[i]);
-                        aList.add(num[j]);
-                        aList.add(num[index]);
-                    }
-
-                } else if (findLocation == 3)
-                {
-                    index = Arrays.binarySearch(num, thirdLowest, thirdHighest + 1, sumValue);
-
-                    if (index >= 0 && index > j)
-                    {
-                        aList.add(num[i]);
-                        aList.add(num[j]);
-                        aList.add(num[index]);
-                    }
-
-                    int k = j;
-                    //updates
-                    while (k + 1 < num.length && num[j] == num[k + 1])
-                    {
-                        if (num[j] == num[k])
-                        {
-                            k++;
-                        }
-                    }
-
-                    j = k;
-
-                }
-                if (aList.size() == 3)
-                {
-                    firstPart.add(aList);
-                }
-            }
-
-            int k = i;
-
-            while (k + 1 < num.length && num[i] == num[k + 1])
-            {
-                if (num[i] == num[k])
-                {
-                    k++;
-                }
-            }
-            i = k;
-        }
-
-        answer.addAll(firstPart);
-
-
-        return answer;
-    }
-
     /**
      * Returns which third in the array the number is located in the sorted array
      * @param num Sorted Array
@@ -363,6 +249,6 @@ class SumTest
 
         int index = Arrays.binarySearch(zeroTest, 0, zeroTest.length, 2);
 
-        rawr.oneMoreThreeSum(testCase2);
+        rawr.threeSum(testCase2);
     }
 }
